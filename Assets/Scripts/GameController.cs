@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    // Board dimensions:
+    public int m = 3; // Rows
+    public int n = 3; // Columns
+    // Winning run:
+    public int k = 3;
+
     public Text[] spaceList;
     public GameObject gameOverPanel;
     public Text gameOverText;
@@ -46,23 +52,77 @@ public class GameController : MonoBehaviour
     public void EndTurn()
     {
         moves++;
-        if (spaceList[0].text == side && spaceList[1].text == side && spaceList[2].text == side)
-            GameOver();
-        else if (spaceList[3].text == side && spaceList[4].text == side && spaceList[5].text == side)
-            GameOver();
-        else if (spaceList[6].text == side && spaceList[7].text == side && spaceList[8].text == side)
-            GameOver();
-        else if (spaceList[0].text == side && spaceList[3].text == side && spaceList[6].text == side)
-            GameOver();
-        else if (spaceList[1].text == side && spaceList[4].text == side && spaceList[7].text == side)
-            GameOver();
-        else if (spaceList[2].text == side && spaceList[5].text == side && spaceList[8].text == side)
-            GameOver();
-        else if (spaceList[0].text == side && spaceList[4].text == side && spaceList[8].text == side)
-            GameOver();
-        else if (spaceList[2].text == side && spaceList[4].text == side && spaceList[6].text == side)
-            GameOver();
-        if (moves >= 9)
+
+        // Check rows.
+        for (int row = 0; row < m; row++)
+        {
+            bool win = true;
+            for (int col = 0; col < n; col++)
+            {
+                if (spaceList[row * m + col].text != side)
+                {
+                    win = false;
+                    break;
+                }
+            }
+            if (win == true)
+            {
+                GameOver();
+            }
+        }
+
+
+        // Check columns.
+        for (int col = 0; col < n; col++)
+        {
+            bool win = true;
+            for (int row = 0; row < m; row++)
+            {
+                if (spaceList[row * m + col].text != side)
+                {
+                    win = false;
+                    break;
+                }
+            }
+            if (win == true)
+            {
+                GameOver();
+            }
+        }
+
+        // Check diagonals.
+        // TODO: handle boards where m != n and where k < m || k < n.
+        {
+            bool win = true;
+            for (int i = 0; i < m; i++)
+            {
+                if (spaceList[i * m + i].text != side)
+                {
+                    win = false;
+                    break;
+                }
+            }
+            if (win == true)
+            {
+                GameOver();
+            }
+
+            win = true;
+            for (int i = 0; i < m; i++)
+            {
+                if (spaceList[(m * i) + (m - 1 - i)].text != side)
+                {
+                    win = false;
+                    break;
+                }
+            }
+            if (win == true)
+            {
+                GameOver();
+            }
+        }
+
+        if (moves >= m * n)
         {
             gameOverPanel.SetActive(true);
             gameOverText.text = "Cat's Game";
