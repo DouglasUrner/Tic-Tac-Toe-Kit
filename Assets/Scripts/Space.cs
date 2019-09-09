@@ -15,4 +15,10 @@ public class Space : MonoBehaviour
         gameController = controller;
     }
 
+    public void SetSpace()
+    {
+        buttonText.text = gameController.GetSide();
+        button.interactable = false;
+        gameController.EndTurn();
+    }
 }
