@@ -11,10 +11,18 @@ public class GameController : MonoBehaviour
     // Winning run:
     public int k = 3;
 
+    public int gridOriginX = -55;
+    public int gridOriginY = 100;
+    public Transform gridCanvas;
+
     public Text[] spaceList;
+    public GameObject[][] grid;
     public GameObject gameOverPanel;
     public Text gameOverText;
     public GameObject restartButton;
+    public GameObject spacePrefab;
+    public int spaceW = 75; // Width of Space plus padding.
+    public int spaceH = 70; // Height of Space plus padding.
 
     private string side;
     private int moves;
@@ -22,6 +30,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LayoutGrid(m, n);
         SetGameControllerReferenceForButtons();
   
         gameOverPanel.SetActive(false);
@@ -29,6 +38,20 @@ public class GameController : MonoBehaviour
 
         side = "X";
         moves = 0;
+    }
+
+    void LayoutGrid(int rows, int cols)
+    {
+        grid = new GameObject[rows][];
+        for (int r = 0; r < rows; r++)
+        {
+            grid[r] = new GameObject[cols];
+            for (int c = 0; c < cols; c++)
+            {
+                grid[r][c] = Instantiate(spacePrefab, new Vector3(gridOriginX + spaceW * c, gridOriginY + spaceH * r, 0), Quaternion.identity, gridCanvas);
+                grid[r][c].name = "Space(" + r + ", " + c + ")";
+            }
+        }
     }
 
     void SetGameControllerReferenceForButtons()

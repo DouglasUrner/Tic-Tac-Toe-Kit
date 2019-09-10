@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Space (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2679054399653900759, guid: 1b7587e4887438042b123b7efe7ff231,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2679054399653900758, guid: 1b7587e4887438042b123b7efe7ff231,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -402,6 +407,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Space (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2679054399653900759, guid: 1b7587e4887438042b123b7efe7ff231,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2679054399653900758, guid: 1b7587e4887438042b123b7efe7ff231,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -622,6 +632,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Space (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2679054399653900759, guid: 1b7587e4887438042b123b7efe7ff231,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2679054399653900758, guid: 1b7587e4887438042b123b7efe7ff231,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -764,6 +779,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Space (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2679054399653900759, guid: 1b7587e4887438042b123b7efe7ff231,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679054399653900758, guid: 1b7587e4887438042b123b7efe7ff231,
         type: 3}
@@ -976,6 +996,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Space (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2679054399653900759, guid: 1b7587e4887438042b123b7efe7ff231,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679054399653900758, guid: 1b7587e4887438042b123b7efe7ff231,
         type: 3}
@@ -1421,6 +1446,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Space (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2679054399653900759, guid: 1b7587e4887438042b123b7efe7ff231,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2679054399653900758, guid: 1b7587e4887438042b123b7efe7ff231,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1558,6 +1588,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Space (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2679054399653900759, guid: 1b7587e4887438042b123b7efe7ff231,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2679054399653900758, guid: 1b7587e4887438042b123b7efe7ff231,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1694,6 +1729,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Space (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2679054399653900759, guid: 1b7587e4887438042b123b7efe7ff231,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679054399653900758, guid: 1b7587e4887438042b123b7efe7ff231,
         type: 3}
@@ -2131,6 +2171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fef96aa78966af4d9cf6dd409822a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m: 3
+  n: 3
+  k: 3
+  gridOriginX: -55
+  gridOriginY: 100
+  gridCanvas: {fileID: 1596459356}
   spaceList:
   - {fileID: 1342398123}
   - {fileID: 1420882869}
@@ -2144,6 +2190,10 @@ MonoBehaviour:
   gameOverPanel: {fileID: 1791320422}
   gameOverText: {fileID: 733849857}
   restartButton: {fileID: 105764351}
+  spacePrefab: {fileID: 2679054399653900759, guid: 1b7587e4887438042b123b7efe7ff231,
+    type: 3}
+  spaceW: 55
+  spaceH: 55
 --- !u!1 &2035311386
 GameObject:
   m_ObjectHideFlags: 0
@@ -2230,6 +2280,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Space
+      objectReference: {fileID: 0}
+    - target: {fileID: 2679054399653900759, guid: 1b7587e4887438042b123b7efe7ff231,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679054399653900758, guid: 1b7587e4887438042b123b7efe7ff231,
         type: 3}
