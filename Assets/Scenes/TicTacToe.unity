@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: 70}
+  m_AnchoredPosition: {x: 0, y: 350}
   m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &105764353
@@ -758,7 +758,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 55, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 298, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1791320424
@@ -921,19 +921,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fef96aa78966af4d9cf6dd409822a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m: 4
-  n: 4
-  k: 3
+  m: 5
+  n: 5
+  k: 4
+  misere: 1
   gridOriginX: 0
   gridOriginY: 0
-  gridCanvas: {fileID: 1596459356}
+  board: {fileID: 1829152664}
   gameOverPanel: {fileID: 1791320422}
   gameOverText: {fileID: 733849857}
   restartButton: {fileID: 105764351}
   spacePrefab: {fileID: 2679054399653900759, guid: 1b7587e4887438042b123b7efe7ff231,
     type: 3}
-  spaceW: 75
-  spaceH: 70
+  spaceW: 100
+  spaceH: 100
 --- !u!1 &1829152663
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,15 +962,15 @@ RectTransform:
   m_GameObject: {fileID: 1829152663}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1596459356}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 800, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1829152665
 MonoBehaviour:
