@@ -101,7 +101,6 @@ public class GameController : MonoBehaviour
                     if (grid[row][col].buttonText.text != side)
                     {
                         win = false;
-                        break;
                     }
                 }
                 if (win == true)
@@ -114,6 +113,7 @@ public class GameController : MonoBehaviour
         // Check diagonals.
         // XXX: assumes that m == n.
         // TODO: handle boards where m != n and where k < m || k < n.
+        if (k == m)
         {
             bool win = true;
             for (int i = 0; i < m; i++)
@@ -135,12 +135,57 @@ public class GameController : MonoBehaviour
                 if (grid[i][(n-1) - i].buttonText.text != side)
                 {
                     win = false;
-                    break;
                 }
             }
             if (win == true)
             {
                 GameOver(side);
+            }
+        } else {
+            /*
+            ** When k < m on n, we can start a check at any row or column where
+            ** row < m - k and col < n - k
+            */
+            for (int baseR = 0; baseR <= m - k; baseR++)
+            {
+                for (int baseC = n - 1; baseC >= k - 1; baseC--)
+                {
+                    bool win = true;
+                    for (int step = 0; step < k; step++)
+                    {
+                        int row = baseR + step;
+                        int col = baseC - step;
+                        if (grid[row][col].buttonText.text != side)
+                        {
+                            win = false;
+                        }
+                    }
+                    if (win == true)
+                    {
+                        GameOver(side);
+                    }
+                }
+            }
+            
+            for (int baseR = 0; baseR <= m - k; baseR++)
+            {
+                for (int baseC = 0; baseC <= n - k; baseC++)
+                {
+                    bool win = true;
+                    for (int step = 0; step < k; step++)
+                    {
+                        int row = baseR + step;
+                        int col = baseC + step;
+                        if (grid[row][col].buttonText.text != side)
+                        {
+                            win = false;
+                        }
+                    }
+                    if (win == true)
+                    {
+                        GameOver(side);
+                    }
+                }
             }
         }
 
