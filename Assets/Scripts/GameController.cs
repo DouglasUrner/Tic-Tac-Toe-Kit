@@ -11,9 +11,12 @@ public class GameController : MonoBehaviour
     // Winning run:
     public int k = 3;
 
+    // Playing mode:
+    public bool misere = false;     // Invert win, k in a row loses.
+
     public int gridOriginX = 0;
     public int gridOriginY = 0;
-    public Transform gridCanvas;
+    public Transform board;
 
     public Space[][] grid;
     public GameObject gameOverPanel;
@@ -35,6 +38,12 @@ public class GameController : MonoBehaviour
 
     void LayoutGrid(int rows, int cols)
     {
+        // Center grid in game window.
+        gridOriginX = Screen.width / 2 - (m / 2 * spaceW);
+        gridOriginY = Screen.height / 2 - (n / 2 * spaceH);
+
+        // Size the gameOverPanel.
+
         grid = new Space[rows][];
         for (int r = 0; r < rows; r++)
         {
@@ -42,7 +51,7 @@ public class GameController : MonoBehaviour
             for (int c = 0; c < cols; c++)
             {
                 var loc = new Vector3(gridOriginX + spaceW * c, gridOriginY + spaceH * r, 0);
-                grid[r][c] = Instantiate(spacePrefab, loc, Quaternion.identity, gridCanvas).GetComponent<Space>();
+                grid[r][c] = Instantiate(spacePrefab, loc, Quaternion.identity, board).GetComponent<Space>();
                 grid[r][c].name = "Space(" + r + ", " + c + ")";
                 grid[r][c].SetControllerReference(this);
                 //grid[r][c].buttonText.text = "" + r + c;
@@ -172,7 +181,14 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            message = winner + " Wins";
+            if (misere)
+            {
+                message = winner + " Loses";
+            }
+            else
+            {
+                message = winner + " Wins";
+            }
         }
 
         gameOverPanel.SetActive(true);
