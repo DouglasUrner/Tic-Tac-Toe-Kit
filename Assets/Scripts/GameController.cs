@@ -84,15 +84,17 @@ public class GameController : MonoBehaviour
                     if (grid[row][col].buttonText.text != side)
                     {
                         win = false;
+                        break;
                     }
+                    Debug.Log("[" + row + "][" + col + "]: " + grid[row][col].buttonText.text + " win: " + win);
                 }
                 if (win == true)
                 {
-                    GameOver(side);
+                    GameOver(side); // XXX - can result in false draw, hence below.
+                    return;         // XXX - we should return a result rather than calling GameOver().
                 }
             }
         }
-
 
         // Check columns.
         for (int col = 0; col < n; col++)
@@ -105,11 +107,13 @@ public class GameController : MonoBehaviour
                     if (grid[row][col].buttonText.text != side)
                     {
                         win = false;
+                        break;
                     }
                 }
                 if (win == true)
                 {
                     GameOver(side);
+                    return; // XXX
                 }
             }
         }
@@ -137,6 +141,7 @@ public class GameController : MonoBehaviour
                 if (win == true)
                 {
                     GameOver(side);
+                    return; // XXX
                 }
             }
         }
@@ -158,6 +163,7 @@ public class GameController : MonoBehaviour
                 if (win == true)
                 {
                     GameOver(side);
+                    return; // XXX
                 }
             }
         }
