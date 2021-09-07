@@ -11,18 +11,17 @@ public class GameController : MonoBehaviour
     // Winning run:
     public int k = 3;
 
-    public int gridOriginX = -55;
-    public int gridOriginY = 100;
+    public int gridOriginX = 0;
+    public int gridOriginY = 0;
     public Transform gridCanvas;
 
-    public Text[] spaceList;
-    public GameObject[][] grid;
+    public Space[][] grid;
     public GameObject gameOverPanel;
     public Text gameOverText;
     public GameObject restartButton;
     public GameObject spacePrefab;
     public int spaceW = 75; // Width of Space plus padding.
-    public int spaceH = 70; // Height of Space plus padding.
+    public int spaceH = 75; // Height of Space plus padding.
 
     private string side;
     private int moves;
@@ -31,7 +30,6 @@ public class GameController : MonoBehaviour
     void Start()
     {
         LayoutGrid(m, n);
-        SetGameControllerReferenceForButtons();
   
         gameOverPanel.SetActive(false);
         restartButton.SetActive(false);
@@ -42,23 +40,18 @@ public class GameController : MonoBehaviour
 
     void LayoutGrid(int rows, int cols)
     {
-        grid = new GameObject[rows][];
+        grid = new Space[rows][];
         for (int r = 0; r < rows; r++)
         {
-            grid[r] = new GameObject[cols];
+            grid[r] = new Space[cols];
             for (int c = 0; c < cols; c++)
             {
-                grid[r][c] = Instantiate(spacePrefab, new Vector3(gridOriginX + spaceW * c, gridOriginY + spaceH * r, 0), Quaternion.identity, gridCanvas);
+                var loc = new Vector3(gridOriginX + spaceW * c, gridOriginY + spaceH * r, 0);
+                grid[r][c] = Instantiate(spacePrefab, loc, Quaternion.identity, gridCanvas).GetComponent<Space>();
                 grid[r][c].name = "Space(" + r + ", " + c + ")";
+                grid[r][c].SetControllerReference(this);
+                //grid[r][c].buttonText.text = "" + r + c;
             }
-        }
-    }
-
-    void SetGameControllerReferenceForButtons()
-    {
-        for (int i = 0; i < spaceList.Length; i++)
-        {
-            spaceList[i].GetComponentInParent<Space>().SetControllerReference(this);
         }
     }
 
@@ -82,7 +75,7 @@ public class GameController : MonoBehaviour
             bool win = true;
             for (int col = 0; col < n; col++)
             {
-                if (spaceList[row * m + col].text != side)
+                if (grid[row][col].buttonText.text != side)
                 {
                     win = false;
                     break;
@@ -90,7 +83,7 @@ public class GameController : MonoBehaviour
             }
             if (win == true)
             {
-                GameOver();
+                GameOver(side);
             }
         }
 
@@ -101,7 +94,7 @@ public class GameController : MonoBehaviour
             bool win = true;
             for (int row = 0; row < m; row++)
             {
-                if (spaceList[row * m + col].text != side)
+                if (grid[row][col].buttonText.text != side)
                 {
                     win = false;
                     break;
@@ -109,17 +102,18 @@ public class GameController : MonoBehaviour
             }
             if (win == true)
             {
-                GameOver();
+                GameOver(side);
             }
         }
 
         // Check diagonals.
+        // XXX: assumes that m == n.
         // TODO: handle boards where m != n and where k < m || k < n.
         {
             bool win = true;
             for (int i = 0; i < m; i++)
             {
-                if (spaceList[i * m + i].text != side)
+                if (grid[i][i].buttonText.text != side)
                 {
                     win = false;
                     break;
@@ -127,13 +121,13 @@ public class GameController : MonoBehaviour
             }
             if (win == true)
             {
-                GameOver();
+                GameOver(side);
             }
 
             win = true;
             for (int i = 0; i < m; i++)
             {
-                if (spaceList[(m * i) + (m - 1 - i)].text != side)
+                if (grid[i][(n-1) - i].buttonText.text != side)
                 {
                     win = false;
                     break;
@@ -141,32 +135,44 @@ public class GameController : MonoBehaviour
             }
             if (win == true)
             {
-                GameOver();
+                GameOver(side);
             }
         }
 
         if (moves >= m * n)
         {
-            gameOverPanel.SetActive(true);
-            gameOverText.text = "Cat's Game";
-            restartButton.SetActive(true);
+            GameOver("draw");
+        } else {
+            ChangeSide();
         }
-        ChangeSide();
     }
 
-    void GameOver()
+    void GameOver(string winner)
     {
+        string message;
+        
+        if (winner == "draw")
+        {
+            message = "Cat's Game";
+        } else {
+            message = winner + " Wins";
+        }
+
         gameOverPanel.SetActive(true);
-        gameOverText.text = side + " wins!";
+        gameOverText.text = message;
         restartButton.SetActive(true);
-        for (int i = 0; i < spaceList.Length; i++)
-            SetInteractable(false);
+        SetInteractable(false);
     }
 
-    void SetInteractable(bool setting)
+    void SetInteractable(bool toggle)
     {
-        for (int i = 0; i < spaceList.Length; i++)
-            spaceList[i].GetComponentInParent<Button>().interactable = setting;
+        for (int row = 0; row < m; row++)
+        {
+            for (int col = 0; col < n; col++)
+            {
+                grid[row][col].button.interactable = toggle;
+            }
+        }
     }
 
     public void Restart()
@@ -176,7 +182,12 @@ public class GameController : MonoBehaviour
         gameOverPanel.SetActive(false);
         SetInteractable(true);
         restartButton.SetActive(false);
-        for (int i = 0; i < spaceList.Length; i++)
-            spaceList[i].text = "";
+        for (int r = 0; r < m; r++)
+        {
+            for (int c = 0; c < n; c++)
+            {
+                grid[r][c].buttonText.text = "";
+            }
+        }
     }
 }
