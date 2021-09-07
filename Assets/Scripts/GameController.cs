@@ -72,18 +72,20 @@ public class GameController : MonoBehaviour
         // Check rows.
         for (int row = 0; row < m; row++)
         {
-            bool win = true;
-            for (int col = 0; col < n; col++)
+            for (int start = 0; start <= (n - k); start++)
             {
-                if (grid[row][col].buttonText.text != side)
+                bool win = true;
+                for (int col = start; col < (start + k); col++)
                 {
-                    win = false;
-                    break;
+                    if (grid[row][col].buttonText.text != side)
+                    {
+                        win = false;
+                    }
                 }
-            }
-            if (win == true)
-            {
-                GameOver(side);
+                if (win == true)
+                {
+                    GameOver(side);
+                }
             }
         }
 
@@ -91,18 +93,21 @@ public class GameController : MonoBehaviour
         // Check columns.
         for (int col = 0; col < n; col++)
         {
-            bool win = true;
-            for (int row = 0; row < m; row++)
+            for (int start = 0; start <= (m - k); start++)
             {
-                if (grid[row][col].buttonText.text != side)
+                bool win = true;
+                for (int row = start; row < start + k; row++)
                 {
-                    win = false;
-                    break;
+                    if (grid[row][col].buttonText.text != side)
+                    {
+                        win = false;
+                        break;
+                    }
                 }
-            }
-            if (win == true)
-            {
-                GameOver(side);
+                if (win == true)
+                {
+                    GameOver(side);
+                }
             }
         }
 

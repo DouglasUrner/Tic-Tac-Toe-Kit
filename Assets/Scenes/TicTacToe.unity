@@ -846,20 +846,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m: 4
   n: 4
-  k: 4
+  k: 3
   gridOriginX: 455
   gridOriginY: 221
   gridCanvas: {fileID: 1596459356}
-  spaceList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   gameOverPanel: {fileID: 1791320422}
   gameOverText: {fileID: 733849857}
   restartButton: {fileID: 105764351}
